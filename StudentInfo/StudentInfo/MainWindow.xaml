@@ -1,0 +1,41 @@
+﻿<Window x:Class="StudentInfo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentInfo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <StackPanel>
+            <Label FontWeight="Bold" FontSize="20">Student Info</Label>
+        </StackPanel>
+        <StackPanel>
+            <DockPanel >
+                <Image Source="E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\assets\HaiDuong.png" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="100,0,20,0" Height="300"/>
+                <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Margin="0,0,100,0">
+                    <TextBlock FontSize="20">
+                        Student ID: HE161660
+                    </TextBlock>
+                    <TextBox FontSize="20">
+                        Nguyen Luong Khang
+                    </TextBox>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock FontSize="20" Padding="0,0,50,0">Sex:</TextBlock>
+                        <RadioButton VerticalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" Padding="4,-1,20,0">Male </RadioButton>
+                        <RadioButton VerticalAlignment="Center" FontSize="20" VerticalContentAlignment="Center">Female</RadioButton>
+                    </StackPanel>
+                    <CheckBox VerticalAlignment="Center" FontSize="20" VerticalContentAlignment="Center">Active</CheckBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Center" FontSize="20" Padding="0,0,50,0">DOB:</TextBlock>
+                        <DatePicker VerticalAlignment="Center" FontSize="20" HorizontalContentAlignment="Stretch" Width="166" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+        <StackPanel Margin="30">
+            <Button Width="150" FontSize="20" >Edit</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>
