@@ -15,7 +15,8 @@
         <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="3"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Background="#FFF0F0F0" Width="300">
@@ -24,7 +25,8 @@
                         Height="280"/>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Column="1">
+                <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch"/>
+                <Grid Grid.Column="2">
                     <StackPanel Margin="10,10,50,10" >
                         <Label FontSize="20">
                             Student ID: HE161660
