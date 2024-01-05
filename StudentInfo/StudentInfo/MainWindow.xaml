@@ -19,40 +19,53 @@
                     <ColumnDefinition Width="3"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Background="#FFF0F0F0" Width="300">
-                    <StackPanel Margin="10" Background="White">
+                <Grid Grid.Column="0">
+                    <StackPanel Margin="10" >
                         <Image Source="E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\assets\HaiDuong.png" 
                         Height="280"/>
                     </StackPanel>
                 </Grid>
-                <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Stretch"/>
-                <Grid Grid.Column="2">
-                    <StackPanel Margin="10,10,50,10" >
-                        <Label FontSize="20">
-                            Student ID: HE161660
-                        </Label>
-                        <TextBox FontSize="20">
-                            Nguyen Luong Khang
-                        </TextBox>
-                        <StackPanel Orientation="Horizontal">
-                            <Label FontSize="20" Content="Sex: "></Label>
-                            <RadioButton FontSize="20" VerticalContentAlignment="Center" Content="Male "/>
-                            <RadioButton FontSize="20" VerticalContentAlignment="Center" Content="Female"/>
+                <GridSplitter Grid.Column="1" Background="Black" Width="3" HorizontalAlignment="Stretch"/>
+                <Grid Grid.Column="2" MaxHeight="300">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible">
+                        <StackPanel Margin="10,10,10,10" >
+                            <Label FontSize="20">
+                                Student ID: HE161660
+                            </Label>
+                            <TextBox FontSize="20">
+                                Nguyen Luong Khang
+                            </TextBox>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="20" Content="Sex: "></Label>
+                                <RadioButton FontSize="20" VerticalContentAlignment="Center" Content="Male "/>
+                                <RadioButton FontSize="20" VerticalContentAlignment="Center" Content="Female"/>
+                            </StackPanel>
+                            <CheckBox FontSize="20" VerticalContentAlignment="Center" Content="Active"/>
+                            <DatePicker FontSize="20"/>
                         </StackPanel>
-                        <CheckBox FontSize="20" VerticalContentAlignment="Center" Content="Active"/>
-                        <DatePicker FontSize="20"/>
-                    </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </Grid>
         </StackPanel>
-        <StackPanel Margin="10, 20">
-            <Button Content="Edit" Width="200" Height="35" FontSize="20">
+        <StackPanel Margin="30">
+            <Button Content="Edit" Width="150" Height="35" FontSize="20">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="9"></Setter>
+                        <Setter Property="CornerRadius" Value="20"></Setter>
                     </Style>
                 </Button.Resources>
             </Button>
+            <!--<Grid Width="200" Height="35">
+                <Border BorderBrush="#FFF0F0F0" BorderThickness="2">
+                    <Button Content="Edit" FontSize="20">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="9"></Setter>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
+            </Grid>-->
         </StackPanel>
     </StackPanel>
 </Window>
