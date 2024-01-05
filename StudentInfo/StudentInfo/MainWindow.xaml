@@ -8,34 +8,49 @@
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
         <StackPanel>
-            <Label FontWeight="Bold" FontSize="20">Student Info</Label>
+            <Label FontWeight="Bold" FontSize="30" HorizontalAlignment="Center" FontFamily="Roboto">
+                Student Info
+            </Label>
         </StackPanel>
         <StackPanel>
-            <DockPanel >
-                <Image Source="E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\assets\HaiDuong.png" 
-                       HorizontalAlignment="Center" VerticalAlignment="Center" Margin="100,0,20,0" Height="300"/>
-                <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Margin="0,0,100,0">
-                    <TextBlock FontSize="20">
-                        Student ID: HE161660
-                    </TextBlock>
-                    <TextBox FontSize="20">
-                        Nguyen Luong Khang
-                    </TextBox>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock FontSize="20" Padding="0,0,50,0">Sex:</TextBlock>
-                        <RadioButton VerticalAlignment="Center" FontSize="20" VerticalContentAlignment="Center" Padding="4,-1,20,0">Male </RadioButton>
-                        <RadioButton VerticalAlignment="Center" FontSize="20" VerticalContentAlignment="Center">Female</RadioButton>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Background="#FFF0F0F0" Width="300">
+                    <StackPanel Margin="10" Background="White">
+                        <Image Source="E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\assets\HaiDuong.png" 
+                        Height="280"/>
                     </StackPanel>
-                    <CheckBox VerticalAlignment="Center" FontSize="20" VerticalContentAlignment="Center">Active</CheckBox>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" FontSize="20" Padding="0,0,50,0">DOB:</TextBlock>
-                        <DatePicker VerticalAlignment="Center" FontSize="20" HorizontalContentAlignment="Stretch" Width="166" VerticalContentAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <StackPanel Margin="10,10,50,10" >
+                        <Label FontSize="20">
+                            Student ID: HE161660
+                        </Label>
+                        <TextBox FontSize="20">
+                            Nguyen Luong Khang
+                        </TextBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Label FontSize="20" Content="Sex: "></Label>
+                            <RadioButton FontSize="20" VerticalContentAlignment="Center" Content="Male "/>
+                            <RadioButton FontSize="20" VerticalContentAlignment="Center" Content="Female"/>
+                        </StackPanel>
+                        <CheckBox FontSize="20" VerticalContentAlignment="Center" Content="Active"/>
+                        <DatePicker FontSize="20"/>
                     </StackPanel>
-                </StackPanel>
-            </DockPanel>
+                </Grid>
+            </Grid>
         </StackPanel>
-        <StackPanel Margin="30">
-            <Button Width="150" FontSize="20" >Edit</Button>
+        <StackPanel Margin="10, 20">
+            <Button Content="Edit" Width="200" Height="35" FontSize="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="9"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </StackPanel>
 </Window>

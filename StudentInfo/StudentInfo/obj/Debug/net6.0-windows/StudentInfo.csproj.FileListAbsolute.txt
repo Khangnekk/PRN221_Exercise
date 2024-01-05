@@ -38,3 +38,4 @@ E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\St
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.pdb
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.genruntimeconfig.cache
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\ref\StudentInfo.dll
+E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.sourcelink.json
