@@ -47,7 +47,7 @@
                 </Grid>
             </Grid>
         </StackPanel>
-        <StackPanel Margin="30">
+        <StackPanel Margin="15">
             <Button Content="Edit" Width="150" Height="35" FontSize="20">
                 <Button.Resources>
                     <Style TargetType="Border">
