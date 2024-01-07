@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentInfo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Exercise: 3/1/2024" Height="450" Width="800">
     <Window.Resources>
         <SolidColorBrush x:Key="Mycolor" Color="Red"/>
         <local:Employee x:Key="MyEmployee" Id="1" Name="Khangnek"></local:Employee>

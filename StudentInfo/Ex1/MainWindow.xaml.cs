@@ -48,14 +48,16 @@ namespace Ex1
             StudentVM studentVM = (StudentVM)this.Resources["StudentVM"];
             if (studentVM.Students.Any(s => student.Id == s.Id))
             {
-                MessageBox.Show(" Id is unique! Please try again", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(" Id is unique! Please try again", "Warning",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             else
             {
                 studentVM.Students.Add(student);
                 CollectionViewSource.GetDefaultView(MyListbox.ItemsSource).Refresh();
-                MessageBox.Show("Successfully added new student", "Notfication", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Successfully added new student", "Notfication",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -74,11 +76,16 @@ namespace Ex1
                 currentStudent.FullName = student.FullName;
                 currentStudent.Major = student.Major;
                 CollectionViewSource.GetDefaultView(MyListbox.ItemsSource).Refresh();
-                MessageBox.Show($"Successfully edited a student with Id{student.Id}", "Notfication", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Successfully edited:" +
+                    $"\n\nID: {student.Id}" +
+                    $"\nFull Name: {student.FullName} " +
+                    $"\nMajor: {student.Major}",
+                    "Notfication", MessageBoxButton.OK);
             }
             else
             {
-                MessageBox.Show(" Maybe something wrong! Please try again", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(" Maybe something wrong! Please try again", "Warning",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
         }

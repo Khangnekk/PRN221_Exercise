@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ex1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Exercise: 6/1/2024" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:StudentVM x:Key="StudentVM"></local:StudentVM>
     </Window.Resources>
