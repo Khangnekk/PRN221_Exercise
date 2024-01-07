@@ -51,18 +51,19 @@
         <StackPanel Grid.Column="2" Margin="20">
             <StackPanel>
                 <Label Content="ID:"/>
-                <TextBox x:Name="txtID" IsEnabled="False" 
-                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.Id, Mode=TwoWay}"/>
+                <TextBox x:Name="txtID"
+                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.Id, Mode=OneWay}"/>
                 <Label Content="FullName:"/>
                 <TextBox x:Name="txtFullName" 
-                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.FullName, Mode=TwoWay}"/>
+                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.FullName, Mode=OneWay}"/>
                 <Label Content="Major:"/>
                 <TextBox x:Name="txtMajor" 
-                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.Major, Mode=TwoWay}"/>
+                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.Major, Mode=OneWay}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-                <Button x:Name="btnAdd" Content="Add" Margin="0,0,20,0" Padding="20, 5"></Button>
-                <Button x:Name="btnEdit" Content="Edit" Margin="20,0,0,0" Padding="20, 5"></Button>
+                <Button x:Name="btnAdd" Content="Add" Margin="0,0,20,0" Padding="20, 5" Click="btnAdd_Click"></Button>
+                <Button x:Name="btnEdit" Content="Edit" Margin="20,0,0,0" Padding="20, 5" Click="btnEdit_Click"></Button>
+                <Button x:Name="btnClear" Content="Clear" Margin="20,0,0,0" Padding="20, 5"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>
