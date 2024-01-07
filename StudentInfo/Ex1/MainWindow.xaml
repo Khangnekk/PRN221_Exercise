@@ -1,0 +1,69 @@
+﻿<Window x:Class="Ex1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ex1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:StudentVM x:Key="StudentVM"></local:StudentVM>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource StudentVM}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="3"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <!--Header of table-->
+            <Grid Background="Bisque" Margin="0,0,18,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="ID"  Margin="5" Padding="5,0"/>
+                <TextBlock Grid.Column="1" Text="Full Name" Margin="5" Padding="5,0"/>
+                <TextBlock Grid.Column="2" Text="Major" Margin="0,5" Padding="5,0"/>
+            </Grid>
+            <!--Body of table-->
+            <ListBox ItemsSource="{Binding Path=Students, Mode=TwoWay}" Height="450" x:Name="MyListbox"
+                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single">
+                    <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Path=Id, Mode=TwoWay}" Margin="5"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=FullName, Mode=TwoWay}" Margin="5"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Path=Major, Mode=TwoWay}" Margin="5"/>
+                        </Grid>
+                    </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+        </StackPanel>
+        <GridSplitter Grid.Column="1" Background="Black" HorizontalAlignment="Stretch"/>
+        <StackPanel Grid.Column="2" Margin="20">
+            <StackPanel>
+                <Label Content="ID:"/>
+                <TextBox x:Name="txtID" IsEnabled="False" 
+                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.Id, Mode=TwoWay}"/>
+                <Label Content="FullName:"/>
+                <TextBox x:Name="txtFullName" 
+                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.FullName, Mode=TwoWay}"/>
+                <Label Content="Major:"/>
+                <TextBox x:Name="txtMajor" 
+                         Text="{Binding ElementName=MyListbox, Path=SelectedItem.Major, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
+                <Button x:Name="btnAdd" Content="Add" Margin="0,0,20,0" Padding="20, 5"></Button>
+                <Button x:Name="btnEdit" Content="Edit" Margin="20,0,0,0" Padding="20, 5"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

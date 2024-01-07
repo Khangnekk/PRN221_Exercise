@@ -6,9 +6,13 @@
         xmlns:local="clr-namespace:StudentInfo"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Mycolor" Color="Red"/>
+        <local:Employee x:Key="MyEmployee" Id="1" Name="Khangnek"></local:Employee>
+    </Window.Resources>
     <StackPanel>
         <StackPanel>
-            <Label FontWeight="Bold" FontSize="30" HorizontalAlignment="Center" FontFamily="Roboto">
+            <Label FontWeight="Bold" FontSize="30" HorizontalAlignment="Center" Foreground="{StaticResource Mycolor}" FontFamily="Roboto">
                 Student Info
             </Label>
         </StackPanel>
@@ -32,7 +36,7 @@
                             <Label FontSize="20">
                                 Student ID: HE161660
                             </Label>
-                            <TextBox FontSize="20">
+                            <TextBox FontSize="20" x:Name="txtFullName">
                                 Nguyen Luong Khang
                             </TextBox>
                             <StackPanel Orientation="Horizontal">
@@ -42,6 +46,8 @@
                             </StackPanel>
                             <CheckBox FontSize="20" VerticalContentAlignment="Center" Content="Active"/>
                             <DatePicker FontSize="20"/>
+                            <TextBlock x:Name="TestBinding" Text="{Binding ElementName=txtFullName, Path=Text, Mode=OneWay}"/>
+                            <TextBlock x:Name="TestBinding2" Text="{Binding Source={StaticResource MyEmployee}, Path=Name, Mode=OneWay}"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
