@@ -34,7 +34,6 @@ E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\St
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.AssemblyInfoInputs.cache
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.AssemblyInfo.cs
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.csproj.CoreCompileInputs.cache
-E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.sourcelink.json
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.dll
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\refint\StudentInfo.dll
 E:\HE161660\Ky8_HE161660\PRN221-HE161660\Exercise\PRN221_Exercise\StudentInfo\StudentInfo\obj\Debug\net6.0-windows\StudentInfo.pdb
