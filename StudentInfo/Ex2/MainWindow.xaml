@@ -12,7 +12,7 @@
     <Grid DataContext="{Binding Source={StaticResource productList}}">
         <StackPanel Grid.Column="0">
             <!--Header of table-->
-            <Grid Background="Bisque" Margin="0,0,18,0">
+            <Grid Background="#FFC4EBFF" Margin="0,0,18,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.3*"/>
                     <ColumnDefinition/>
