@@ -1,0 +1,82 @@
+﻿<Window x:Class="Lab1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab1"
+        xmlns:vm="clr-namespace:Lab1.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Lab1 Nguyen Luong Khang (HE161660)" Height="610" Width="1100">
+    <Window.Resources>
+        <vm:OrderViewModel x:Key="OrderVM"></vm:OrderViewModel>        
+    </Window.Resources>
+    <Grid DataContext="{DynamicResource OrderVM}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="10" Grid.Column="0">
+            <ComboBox Width="160" HorizontalAlignment="Left" x:Name="cbEmployee"
+                      ItemsSource="{Binding employees}" SelectedItem="{Binding Path=SelectedEmployee}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=FirstName}" Margin="0 0.2 2 0.2"></TextBlock>
+                            <TextBlock Text="{Binding Path=LastName}" Margin="3 0.2 2 0.2"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Grid Margin="0 0 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="List Order" VerticalContentAlignment="Center"/>
+                <Button Content="Show summary" Grid.Column="2" Height="20" 
+                        Padding="12 1 12 1" Click="Button_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="9"></Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+
+            <DataGrid ItemsSource="{Binding FilteredOrders, Mode=TwoWay}" 
+                      Height="450"
+                      SelectionMode="Single"
+                      AutoGenerateColumns="False"
+                      SelectedItem="{Binding SelectedOrderDTO}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="OrderID" Binding="{Binding ID}" Width="0.35*"/>
+                    <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" Width="*"/>
+                    <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}" Width="*"/>
+                    <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
+                    <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}" Width="0.6*"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit" Command="{Binding Path=EditCommand}" />
+                        <MenuItem Header="Delete" Command="{Binding Path=DeleteCommand}" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="20 50 20 20">
+            <StackPanel DataContext="{Binding Path=SelectedOrderDTO}">
+                <Label FontSize="15">ID</Label>
+                <TextBox FontSize="15" Text="{Binding Path=ID}"></TextBox>
+                <Label FontSize="15">Employee Name</Label>
+                <TextBox FontSize="15" Text="{Binding Path=EmployeeName}"></TextBox>
+                <Label FontSize="15" >Order Date</Label>
+                <DatePicker FontSize="15" DisplayDate="{Binding Path=OrderDate}"></DatePicker>
+                <Label FontSize="15">Product Name</Label>
+                <TextBox FontSize="15" Text="{Binding Path=ProductName}"></TextBox>
+            </StackPanel>
+            <Button Margin="0 20 0 0" FontSize="18" Content="Save Changes"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
