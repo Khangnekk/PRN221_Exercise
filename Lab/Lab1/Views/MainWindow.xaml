@@ -64,6 +64,14 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
+            <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
+                <TextBlock Margin="0 0 5 0" Foreground="red">
+                    (*)
+                </TextBlock>
+                <TextBlock>
+                    Right click on the table to edit or delete
+                </TextBlock>
+            </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="20 50 20 20">
             <StackPanel DataContext="{Binding Path=SelectedOrderDTO}">
@@ -78,5 +86,6 @@
             </StackPanel>
             <Button Margin="0 20 0 0" FontSize="18" Content="Save Changes"></Button>
         </StackPanel>
+        
     </Grid>
 </Window>

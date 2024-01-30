@@ -84,28 +84,44 @@ namespace Lab1.ViewModels
             await Task.Run(() =>
             {
                 OrderDTO orderDTO = SelectedOrderDTO;
-                orderDTOs.Remove(orderDTO);
                 OnPropertyChanged();
-                MessageBoxResult rs = MessageBox.Show("Do you really want to delete it?\n" +
-                                $"----------------------------------\n" +
-                                $"Order ID = {orderDTO.ID}\n" +
-                                $"Employee Name = {orderDTO.EmployeeName}\n" +
-                                $"Order Date = {orderDTO.OrderDate}\n" +
-                                $"Product Name = {orderDTO.ProductName}\n" +
-                                $"Total Amount = {orderDTO.TotalAmount}\n"
-                                , "Lab1 Warning!!!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (rs == MessageBoxResult.Yes)
-                {
 
+                MessageBoxResult result = MessageBox.Show("Do you really want to delete it?\n" +
+                    $"----------------------------------\n" +
+                    $"Order ID = {orderDTO.ID}\n" +
+                    $"Employee Name = {orderDTO.EmployeeName}\n" +
+                    $"Order Date = {orderDTO.OrderDate}\n" +
+                    $"Product Name = {orderDTO.ProductName}\n" +
+                    $"Total Amount = {orderDTO.TotalAmount}\n"
+                    , "Lab1 Warning!!!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        Order orderToDelete = context.Orders.Find(orderDTO.ID);
+
+                        if (orderToDelete != null)
+                        {
+                            context.Orders.Remove(orderToDelete);
+                            context.SaveChanges();
+                            FilterOrdersByEmployee();
+                        }
+
+                        MessageBox.Show("Order deleted successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error deleting order: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Your data is not changed", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-
             });
-
         }
+
 
         private async void Edit()
         {
