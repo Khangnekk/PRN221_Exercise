@@ -75,16 +75,16 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="20 50 20 20">
             <StackPanel DataContext="{Binding Path=SelectedOrderDTO}">
-                <Label FontSize="15">ID</Label>
-                <TextBox FontSize="15" Text="{Binding Path=ID}"></TextBox>
+                <Label FontSize="15" >ID</Label>
+                <TextBox FontSize="15" IsEnabled="False" Text="{Binding Path=ID, Mode=TwoWay}"></TextBox>
                 <Label FontSize="15">Employee Name</Label>
-                <TextBox FontSize="15" Text="{Binding Path=EmployeeName}"></TextBox>
+                <TextBox FontSize="15" Text="{Binding Path=EmployeeName, Mode=TwoWay}"></TextBox>
                 <Label FontSize="15" >Order Date</Label>
-                <DatePicker FontSize="15" DisplayDate="{Binding Path=OrderDate}"></DatePicker>
+                <DatePicker FontSize="15" SelectedDate="{Binding Path=OrderDate, Mode=TwoWay}"></DatePicker>
                 <Label FontSize="15">Product Name</Label>
-                <TextBox FontSize="15" Text="{Binding Path=ProductName}"></TextBox>
+                <TextBox FontSize="15" Text="{Binding Path=ProductName, Mode=TwoWay}"></TextBox>
             </StackPanel>
-            <Button Margin="0 20 0 0" FontSize="18" Content="Save Changes"></Button>
+            <Button Margin="0 20 0 0" FontSize="18" Content="Save Changes" Command="{Binding SaveChangesCommand}"></Button>
         </StackPanel>
         
     </Grid>

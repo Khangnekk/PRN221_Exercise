@@ -47,9 +47,11 @@ namespace Lab1.ViewModels
 
         private RelayCommand editCommand { get; set; }
         private RelayCommand deleteCommand { get; set; }
+        private RelayCommand saveChanges { get; set; }
+
         public RelayCommand EditCommand { get => editCommand; set => editCommand = value; }
         public RelayCommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
-
+        public RelayCommand SaveChangesCommand { get => saveChanges; set => saveChanges = value; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string Name = null)
@@ -77,6 +79,35 @@ namespace Lab1.ViewModels
 
             EditCommand = new RelayCommand(Edit);
             DeleteCommand = new RelayCommand(Delete);
+            SaveChangesCommand = new RelayCommand(SaveChanges);
+        }
+
+        private async void SaveChanges()
+        {
+            await Task.Run(() =>
+            {
+                OrderDTO orderDTO = SelectedOrderDTO;
+                try
+                {
+                    Order orderToEdit = context.Orders.Find(orderDTO.ID);
+
+                    if (orderToEdit != null)
+                    {
+                        orderToEdit.OrderDate = orderDTO.OrderDate;
+                        orderToEdit.OrderDetails.FirstOrDefault().Product.ProductName = orderDTO.ProductName;
+                        context.SaveChanges();
+                        FilterOrdersByEmployee();
+                    }
+
+                    MessageBox.Show("Order edit successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error editing order: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                context.SaveChanges();
+                FilterOrdersByEmployee();
+            });
         }
 
         private async void Delete()
@@ -127,8 +158,8 @@ namespace Lab1.ViewModels
         {
             await Task.Run(() =>
             {
-
-
+                OrderDTO orderDTO = SelectedOrderDTO;
+                OnPropertyChanged(nameof(SelectedOrderDTO));
             });
         }
 
