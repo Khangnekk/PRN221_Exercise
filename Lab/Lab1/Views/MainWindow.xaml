@@ -77,8 +77,8 @@
             <StackPanel DataContext="{Binding Path=SelectedOrderDTO}">
                 <Label FontSize="15" >ID</Label>
                 <TextBox FontSize="15" IsEnabled="False" Text="{Binding Path=ID, Mode=TwoWay}"></TextBox>
-                <Label FontSize="15">Employee Name</Label>
-                <TextBox FontSize="15" Text="{Binding Path=EmployeeName, Mode=TwoWay}"></TextBox>
+                <Label FontSize="15" >Employee Name</Label>
+                <TextBox FontSize="15" IsEnabled="False" Text="{Binding Path=EmployeeName, Mode=TwoWay}"></TextBox>
                 <Label FontSize="15" >Order Date</Label>
                 <DatePicker FontSize="15" SelectedDate="{Binding Path=OrderDate, Mode=TwoWay}"></DatePicker>
                 <Label FontSize="15">Product Name</Label>

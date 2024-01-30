@@ -4,10 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab1.Views"
+        xmlns:vm="clr-namespace:Lab1.ViewModels"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="Show Summary" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
-    <Grid>
-        
+    <Window.Resources>
+        <vm:EmployeeViewModel x:Key="EmployeeVM"/>
+    </Window.Resources>
+
+    <Grid DataContext="{DynamicResource EmployeeVM}">
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Labels="{Binding Labels}" />
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Total Amount" />
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
     </Grid>
 </Window>

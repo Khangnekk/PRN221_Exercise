@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Lab1;
+using Lab1.DTO;
 using Lab1.Models;
 
 public class MappingProfile : Profile
@@ -8,22 +9,32 @@ public class MappingProfile : Profile
     {
         CreateMap<Order, OrderDTO>()
             .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.OrderId))
-            .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => GetEmployeeName(src.Employee != null ? src.Employee.EmployeeId : (int?)null)))
+            .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => src.Employee != null ? $"{src.Employee.FirstName} {src.Employee.LastName}" : string.Empty))
             .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.OrderDetails != null && src.OrderDetails.Any() ? src.OrderDetails.FirstOrDefault().Product.ProductName : null))
             .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.OrderDetails != null ? src.OrderDetails.Sum(od => od.Quantity * od.Product.Price) : 0));
+
+        CreateMap<Employee, EmployeeDTO>()
+            .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+            .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => CalculateTotalAmount(src.Orders)))
+            .ForMember(dest => dest.Orders, opt => opt.MapFrom(src => src.Orders.ToList()));
     }
 
-    private string GetEmployeeName(int? employeeID)
+    private decimal? CalculateTotalAmount(ICollection<Order> orders)
     {
-        if (employeeID == null)
-            return string.Empty;
+        decimal? totalAmount = 0;
 
-        using (var context = new NorthwindContext())
+        foreach (var order in orders)
         {
-            Employee em = context.Employees.FirstOrDefault(e => e.EmployeeId == employeeID);
+            var orderDetail = order.OrderDetails.FirstOrDefault();
 
-            return em != null ? $"{em.FirstName} {em.LastName}" : string.Empty;
+            if (orderDetail != null && orderDetail.Product != null)
+            {
+                totalAmount += orderDetail.Quantity * orderDetail.Product.Price;
+            }
         }
+
+        return totalAmount;
     }
 }
+
 
