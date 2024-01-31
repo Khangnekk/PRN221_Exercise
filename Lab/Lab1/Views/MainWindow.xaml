@@ -54,7 +54,6 @@
                     <DataGridTextColumn Header="OrderID" Binding="{Binding ID}" Width="0.35*"/>
                     <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" Width="*"/>
                     <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}" Width="*"/>
-                    <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
                     <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}" Width="0.6*"/>
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
@@ -81,8 +80,6 @@
                 <TextBox FontSize="15" IsEnabled="False" Text="{Binding Path=EmployeeName, Mode=TwoWay}"></TextBox>
                 <Label FontSize="15" >Order Date</Label>
                 <DatePicker FontSize="15" SelectedDate="{Binding Path=OrderDate, Mode=TwoWay}"></DatePicker>
-                <Label FontSize="15">Product Name</Label>
-                <TextBox FontSize="15" Text="{Binding Path=ProductName, Mode=TwoWay}"></TextBox>
             </StackPanel>
             <Button Margin="0 20 0 0" FontSize="18" Content="Save Changes" Command="{Binding SaveChangesCommand}"></Button>
         </StackPanel>

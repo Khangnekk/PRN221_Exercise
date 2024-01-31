@@ -11,10 +11,7 @@ namespace Lab1
             Init();
         }
 
-        void Init()
-        {
-            cbEmployee.SelectedIndex = 0;
-        }
+        void Init() { cbEmployee.SelectedIndex = 0; }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

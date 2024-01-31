@@ -10,7 +10,6 @@ public class MappingProfile : Profile
         CreateMap<Order, OrderDTO>()
             .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.OrderId))
             .ForMember(dest => dest.EmployeeName, opt => opt.MapFrom(src => src.Employee != null ? $"{src.Employee.FirstName} {src.Employee.LastName}" : string.Empty))
-            .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.OrderDetails != null && src.OrderDetails.Any() ? src.OrderDetails.FirstOrDefault().Product.ProductName : null))
             .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.OrderDetails != null ? src.OrderDetails.Sum(od => od.Quantity * od.Product.Price) : 0));
 
         CreateMap<Employee, EmployeeDTO>()

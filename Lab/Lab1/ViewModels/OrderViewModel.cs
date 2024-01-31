@@ -72,7 +72,6 @@ namespace Lab1.ViewModels
             orders = context.Orders
                         .Include(o => o.Employee)
                         .Include(o => o.OrderDetails)
-                        .ThenInclude(od => od.Product)
                         .ToList();
             orderDTOs = _mapper.Map<List<OrderDTO>>(orders);
 
@@ -94,7 +93,6 @@ namespace Lab1.ViewModels
                     if (orderToEdit != null)
                     {
                         orderToEdit.OrderDate = orderDTO.OrderDate;
-                        orderToEdit.OrderDetails.FirstOrDefault().Product.ProductName = orderDTO.ProductName;
                         context.SaveChanges();
                         FilterOrdersByEmployee();
                     }
@@ -122,7 +120,6 @@ namespace Lab1.ViewModels
                     $"Order ID = {orderDTO.ID}\n" +
                     $"Employee Name = {orderDTO.EmployeeName}\n" +
                     $"Order Date = {orderDTO.OrderDate}\n" +
-                    $"Product Name = {orderDTO.ProductName}\n" +
                     $"Total Amount = {orderDTO.TotalAmount}\n"
                     , "Lab1 Warning!!!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -168,6 +165,7 @@ namespace Lab1.ViewModels
             if (SelectedEmployee != null)
             {
                 FilteredOrders = new ObservableCollection<OrderDTO>(
+                    //orderDTOs.Where(o => o.Employees.FirstOrDefault().EmployeeId == SelectedEmployee.EmployeeId).ToList();
                     context.Orders
                         .Include(o => o.Employee)
                         .Include(o => o.OrderDetails)
@@ -178,11 +176,10 @@ namespace Lab1.ViewModels
                             ID = order.OrderId,
                             EmployeeName = $"{order.Employee.FirstName} {order.Employee.LastName}",
                             OrderDate = order.OrderDate ?? DateTime.MinValue,
-                            ProductName = order.OrderDetails.FirstOrDefault().Product.ProductName,
                             TotalAmount = order.OrderDetails.Sum(od => (od.Quantity * od.Product.Price)) ?? 0
                         })
                         .ToList()
-                );
+                ); ;
             }
             else
             {
