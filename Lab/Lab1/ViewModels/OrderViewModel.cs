@@ -97,11 +97,11 @@ namespace Lab1.ViewModels
                         FilterOrdersByEmployee();
                     }
 
-                    MessageBox.Show("Order edit successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Edit successfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error editing order: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Error editing it: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 context.SaveChanges();
                 FilterOrdersByEmployee();
