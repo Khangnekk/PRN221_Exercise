@@ -1,0 +1,42 @@
+﻿@page "{handler?}"
+@using ExerciseRazerPage.Models
+@model ExerciseRazerPage.Pages.Employee.ListModel
+@{
+}
+<head>
+	<link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+	<div>
+		<div>
+			@{
+				if (Model.employees.Count == 0)
+				{
+					<div>-- No Data --</div>
+				}
+				else
+				{
+					<table>
+						<tr>
+							<th>ID</th>
+							<th>Full Name</th>
+							<th>BirthDate</th>
+							<th>Action</th>
+						</tr>
+						@foreach (var e in Model.employees)
+						{
+							<tr>
+								<td>@e.EmployeeId</td>
+								<td>@e.FirstName @e.LastName</td>
+								<td>@e.BirthDate</td>
+								<td>
+								<a href="/Employee/list/detail">Detail</a>
+								</td>
+							</tr>
+						}
+					</table>
+				}
+			}
+		</div>
+	</div>
+</body>

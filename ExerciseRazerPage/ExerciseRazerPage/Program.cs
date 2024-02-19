@@ -1,6 +1,14 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using ExerciseRazerPage.Models;
+using Microsoft.EntityFrameworkCore;
 
-app.MapGet("/", () => "Hello World!");
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddRazorPages();
+builder.Services.AddDbContext<NorthwindContext>(
+	opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyConnectionStrings")));
+
+var app = builder.Build();
+app.UseStaticFiles();
+app.UseRouting();
+app.MapRazorPages();
 
 app.Run();
