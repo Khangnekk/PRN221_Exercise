@@ -1,6 +1,5 @@
 using ExerciseRazerPage.Models;
 using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<NorthwindContext>(
