@@ -1,4 +1,65 @@
-﻿@page
+﻿@page "{handler?}"
 @model ExerciseRazerPage.Pages.Order.ListModel
 @{
 }
+<head>
+	<link rel="stylesheet" href="/css/styles.css" />
+	<style>
+		.orderList th,td{
+			padding: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div style="display: flex; justify-content: center">
+		<div>
+			<div style="display: flex; justify-content: space-between">
+				<div><h2>List of Order</h2></div>
+				<div style="display: flex; align-items: center">
+					<a href="/Order/Add">
+					<button style="padding: 5px; background-color: forestgreen; color: white; cursor: pointer">
+						Add New Order
+					</button>
+					</a>
+					@* <button type="submit" asp-page-handler="add" style="padding: 5px; background-color: forestgreen; color: white; cursor: pointer">
+						Add New Order
+					</button> *@
+				</div>
+			</div>
+			@{
+				if (Model.Orders.Count == 0)
+				{
+					<div>-- No Data --</div>
+				}
+				else
+				{
+					<table class="orderList" border="1px" style="border-collapse:collapse">
+						<tr>
+							<th>OrderID</th>
+							<th>Customer</th>
+							<th>Employee</th>
+							<th>Order Date</th>
+							<th>Required Date</th>
+							<th>Shipped Date</th>
+							<th>Freight</th>
+							<th>Ship Country</th>
+						</tr>
+						@foreach (var o in Model.Orders)
+						{
+							<tr>
+								<td>@o.OrderId</td>
+								<td>@o.Customer.CompanyName</td>
+								<td>@o.Employee.FirstName @o.Employee.LastName</td>
+								<td>@o.OrderDate</td>
+								<td>@o.RequiredDate</td>
+								<td>@o.ShippedDate</td>
+								<td>@o.Freight</td>
+								<td>@o.ShipCountry</td>
+							</tr>
+						}
+					</table>
+				}
+			}
+		</div>
+	</div>
+</body>

@@ -11,3 +11,6 @@
     border: 1px solid #ccc;
     padding: 2em 6em;
 }
+.orderList th,td{
+    padding: 5px
+}
