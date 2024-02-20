@@ -1,5 +1,40 @@
-﻿@page
+﻿@page "{eid?}"
 @model ExerciseRazerPage.Pages.Employee.DetailModel
 @{
 }
-<div>abc</div>
+
+<head>
+	<link rel="stylesheet" href="/css/styles.css" />
+	<style>
+		ul {
+			list-style-type: none;
+		}
+
+		li {
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container" style="display: flex; justify-content: center">
+		<div class="eInfo" style="width: 60%; border: 2px solid #ccc; border-radius: 10px">
+			<h2 style="text-align: center">Detail of employee (EmployeeID = @Model.employee.EmployeeId)</h2>
+			<div>
+				<ul>
+					<li><b>Full name:</b> @Model.employee.FirstName @Model.employee.LastName</li>
+					<li><b>Title:</b> @Model.employee.Title </li>
+					<li><b>Title Of Courtesy:</b> @Model.employee.TitleOfCourtesy</li>
+					<li><b>Birth Date:</b> @Model.employee.BirthDate</li>
+					<li><b>Hire Date:</b> @Model.employee.HireDate</li>
+					<li><b>Address:</b> @Model.employee.Address</li>
+					<li><b>City:</b> @Model.employee.City</li>
+					<li><b>Region:</b> @Model.employee.Region</li>
+					<li><b>Postal Code:</b> @Model.employee.PostalCode</li>
+					<li><b>Country:</b> @Model.employee.Country</li>
+					<li><b>HomePhone:</b> @Model.employee.HomePhone</li>
+					<li><b>Notes:</b> @Model.employee.Notes</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>

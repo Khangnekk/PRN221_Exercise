@@ -15,10 +15,5 @@ namespace ExerciseRazerPage.Pages.Employee
 		{
 			employees = _context.Employees.ToList();
 		}
-
-		public void OnGetDetail()
-		{
-			RedirectToPage("/Employee/Detail");
-		}
 	}
 }

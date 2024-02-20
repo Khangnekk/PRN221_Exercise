@@ -21,6 +21,7 @@
 							<th>ID</th>
 							<th>Full Name</th>
 							<th>BirthDate</th>
+							<th>Action</th>
 						</tr>
 						@foreach (var e in Model.employees)
 						{
@@ -28,6 +29,9 @@
 								<td>@e.EmployeeId</td>
 								<td>@e.FirstName @e.LastName</td>
 								<td>@e.BirthDate</td>
+								<td>
+									<a href="/Employee/Detail/@e.EmployeeId">Detail</a>
+								</td>
 							</tr>
 						}
 					</table>
