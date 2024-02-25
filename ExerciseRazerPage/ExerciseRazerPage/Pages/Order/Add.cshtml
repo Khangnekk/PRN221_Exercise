@@ -1,60 +1,67 @@
 ﻿@page
 @model ExerciseRazerPage.Pages.Order.AddModel
-@{
-}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        label{
-            margin: 5px;
-        }
-        input, select{
-            width: 50%;
-            height: 30px;
-        }
-    </style>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		label {
+			margin: 5px;
+		}
+
+		input, select {
+			width: 50%;
+			height: 30px;
+		}
+	</style>
 </head>
 <body>
 	<div style="display: flex; justify-content: center">
-        <div style="width: 60%">
-            <form action="/Order/Add" method="post" >
-                <fieldset>
-                    <legend><b>Information of Order</b></legend>
-                    <label for="EmployeeID">Employee:</label>
-                    <select id="EmployeeID" name="EmployeeID">
-                        @foreach(var e in Model.employees)
-                        {
-                            <option value="@e.EmployeeId">@e.FirstName @e.LastName</option>
-                        }
-                    </select>
-                    <br><br>
-                    <label for="EmployeeID">Customer:</label>
-                    <select id="CustomerID" name="CustomerID">
-                        @foreach (var e in Model.customers)
-                        {
-                            <option value="@e.CustomerId">@e.CompanyName - @e.ContactName</option>
-                        }
-                    </select>
-                    <br>
-                    <br>
-                    <label for="OrderDate">Order Date:</label>
-                    <input type="date" id="OrderDate" name="OrderDate">
-                    <br>
-                    <br>
-                    <label for="ShipAddress">Ship Address:</label>
-                    <input type="text" id="ShipAddress" name="ShipAddress">
-                    <br>
-                    <br>
-                    <label for="ship_country">Ship Country:</label>
-                    <input type="text" id="ship_country" name="ship_country">
-                    <br>
-                    <br>
-                </fieldset>
-                <input style="float: right; width: fit-content; padding: 5px; margin-top: 10px; background-color: forestgreen; color: white; cursor: pointer" type="submit" value="Add New Order">
-            </form>
-
+		<div style="width: 60%">
+			<form method="post">
+				<fieldset>
+					<legend><b>Information of Order</b></legend>
+					<label>Employee:</label>
+					<select name="EmployeeID">
+						@if (Model.employees != null)
+						{
+							foreach (var e in Model.employees)
+							{
+								<option value="@e.EmployeeId">@e.FirstName @e.LastName</option>
+							}
+						}
+					</select>
+					<br>
+					<br>
+					<label>Customer:</label>
+					<select name="CustomerID">
+						@if(Model.customers != null){
+						foreach (var e in Model.customers)
+						{
+							<option value="@e.CustomerId">@e.CompanyName - @e.ContactName</option>
+							}
+						}
+					</select>
+					<br>
+					<br>
+					<label>Order Date:</label>
+					<input type="date" id="OrderDate" name="OrderDate">
+					<br>
+					<br>
+					<label>Ship Address:</label>
+					<input type="text" id="ShipAddress" name="ShipAddress">
+					<br>
+					<br>
+					<label>Ship Country:</label>
+					<input type="text" id="ship_country" name="ShipCountry">
+					<br>
+					<br>
+				</fieldset>
+				<input style="float: right; width: fit-content; padding: 5px; margin-top: 10px; background-color: forestgreen; color: white; cursor: pointer" type="submit" value="Add New Order">
+			</form>
+			@Model.Message <a asp-page="/Order/List">List of Orders</a>
 		</div>
 	</div>
 </body>
