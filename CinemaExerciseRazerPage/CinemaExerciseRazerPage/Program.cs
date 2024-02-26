@@ -1,6 +1,13 @@
+using CinemaExerciseRazerPage.Models;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+builder.Services.AddRazorPages();
+builder.Services.AddDbContext<CinemaContext>(
+	opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyConnectionStrings")));
 
-app.MapGet("/", () => "Hello World!");
+var app = builder.Build();
+app.UseStaticFiles();
+app.UseRouting();
+app.MapRazorPages();
 
 app.Run();
