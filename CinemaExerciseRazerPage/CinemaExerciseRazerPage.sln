@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaExerciseRazerPage", "CinemaExerciseRazerPage\CinemaExerciseRazerPage.csproj", "{A9DB2BF9-8341-471B-9F1E-0200C04AF15E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9DB2BF9-8341-471B-9F1E-0200C04AF15E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9DB2BF9-8341-471B-9F1E-0200C04AF15E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9DB2BF9-8341-471B-9F1E-0200C04AF15E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9DB2BF9-8341-471B-9F1E-0200C04AF15E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE8A6F75-3336-4C99-BBBC-6648CCF4B172}
+	EndGlobalSection
+EndGlobal
