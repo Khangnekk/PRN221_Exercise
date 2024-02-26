@@ -1,4 +1,35 @@
-﻿@page
+﻿@page "{handler?}"
 @model CinemaExerciseRazerPage.Pages.Movies.ListModel
 @{
 }
+<head>
+
+</head>
+<body>
+	<div>
+		<h2 style="display: flex; justify-content: center">Danh sách các ngôi sao và các bộ phim họ đóng</h2>
+		<div style="display: flex; justify-content: center">
+			<table border="1px" style="border-collapse:collapse; width: 90vw;">
+				<tr>
+					<th></th>
+					@foreach (var m in Model.Movies)
+					{
+						<th>@m.Title</th>
+					}
+				</tr>
+				@foreach (var s in Model.Stars)
+				{
+					<tr style="height: 25px">
+						<td>@s.Fullname</td>
+						@foreach (var m in Model.Movies)
+						{
+							<td>
+								-- No data --
+							</td>
+						}
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</body>
