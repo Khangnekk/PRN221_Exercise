@@ -13,10 +13,12 @@ namespace CinemaExerciseRazerPage.Pages.Movies
 		}
 		public List<Models.Movie> Movies { get; set; }
 		public List<Models.Star> Stars { get; set; }
+		public List<Models.MovieStar> MovieStars { get; set; }
 		public void OnGet()
 		{
 			Movies = _context.Movies.ToList();
 			Stars = _context.Stars.ToList();
+			MovieStars = _context.MovieStars.ToList();
 		}
 	}
 }

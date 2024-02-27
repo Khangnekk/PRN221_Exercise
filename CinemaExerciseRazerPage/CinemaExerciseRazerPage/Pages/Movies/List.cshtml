@@ -10,7 +10,7 @@
 		<h2 style="display: flex; justify-content: center">Danh sách các ngôi sao và các bộ phim họ đóng</h2>
 		<div style="display: flex; justify-content: center">
 			<table border="1px" style="border-collapse:collapse; width: 90vw;">
-				<tr>
+				<tr style="background-color: lightblue">
 					<th></th>
 					@foreach (var m in Model.Movies)
 					{
@@ -23,8 +23,14 @@
 						<td>@s.Fullname</td>
 						@foreach (var m in Model.Movies)
 						{
-							<td>
-								-- No data --
+							<td style="text-align: center">
+								@foreach (var ms in Model.MovieStars)
+								{
+									@if (ms.MovieId == m.Id && ms.StarId == s.Id)
+									{
+										<b>Position: </b><br> @ms.Position
+									}
+								}
 							</td>
 						}
 					</tr>
