@@ -101,7 +101,7 @@
 				<input type="submit" value="Load Orders" style="margin-top: 15px; width: 100%; height: 30px; cursor: pointer" />
 			</form>
 		</div>
-		<div style="padding: 0 10px 10px 10px; margin-left: 280px">
+		<div style="padding: 0 10px 10px 10px; margin-left: 260px; border-left: 2px dashed #ccc">
 			<div style="display: flex; justify-content: space-between">
 				<div><h2>List of Order</h2></div>
 				<div style="display: flex; align-items: center">
@@ -115,83 +115,85 @@
 					</button> *@
 				</div>
 			</div>
-			@{
-				if (Model.Orders.Count == 0)
-				{
-					<div>-- No Data --</div>
-				}
-				else
-				{
-					<table class="orderList" border="1px" style="border-collapse:collapse">
-						<tr>
-							<th>OrderID</th>
-							<th>Customer</th>
-							<th>Employee</th>
-							<th>Order Date</th>
-							<th>Required Date</th>
-							<th>Shipped Date</th>
-							<th>Freight</th>
-							<th>Ship Country</th>
-						</tr>
-						@foreach (var o in Model.Orders)
-						{
+			<div style="display: flex; justify-content: center">
+				@{
+					if (Model.Orders.Count == 0)
+					{
+						<div>-- No Data --</div>
+					}
+					else
+					{
+						<table class="orderList" border="1px" style="border-collapse:collapse">
 							<tr>
-								<td>@o.OrderId</td>
-								<td>@o.Customer.CompanyName</td>
-								<td>@o.Employee.FirstName @o.Employee.LastName</td>
-								<td>@o.OrderDate</td>
-								<td>@o.RequiredDate</td>
-								<td>@o.ShippedDate</td>
-								<td>@o.Freight</td>
-								<td>@o.ShipCountry</td>
+								<th>OrderID</th>
+								<th>Customer</th>
+								<th>Employee</th>
+								<th>Order Date</th>
+								<th>Required Date</th>
+								<th>Shipped Date</th>
+								<th>Freight</th>
+								<th>Ship Country</th>
 							</tr>
-						}
-					</table>
-					<div class="pagination">
-						@for (int i = 1; i <= Model.TotalPages; i++)
-						{
-							@if (!Model.isFilter)
+							@foreach (var o in Model.Orders)
 							{
-								<a style="margin: 0 5px;" href="/Order/List/@i">@i</a>
+								<tr>
+									<td>@o.OrderId</td>
+									<td>@o.Customer.CompanyName</td>
+									<td>@o.Employee.FirstName @o.Employee.LastName</td>
+									<td>@o.OrderDate</td>
+									<td>@o.RequiredDate</td>
+									<td>@o.ShippedDate</td>
+									<td>@o.Freight</td>
+									<td>@o.ShipCountry</td>
+								</tr>
 							}
-							else
-							{
-								<a href="#" style="cursor: pointer; margin: 0 5px;" onclick="OnClickPageNumberLink(@i)" id="pageNumberLink">@i</a>
-							}
-						}
-					</div>
+						</table>
+					}
 				}
-			}
-			<a href="#" id="back-to-top" style="display: inline-block;padding: 5px;"><i style="text-align: center" class="fa fa-arrow-up"></i><br />Back To Top</a>
-			<script>
-				// JavaScript
-				$(document).ready(function () {
-					$(window).scroll(function () {
-						if ($(this).scrollTop() > 50) {
-							$('#back-to-top').fadeIn();
-						} else {
-							$('#back-to-top').fadeOut();
-						}
-					});
-					// scroll body to 0px on click
-					$('#back-to-top').click(function () {
-						$('body,html').animate({
-							scrollTop: 0
-						}, 400);
-						return false;
-					});
-				});
-
-			</script>
-			<script>
-				function OnClickPageNumberLink(i) {
-					console.log("pageNumber = " + i);
-					console.log("It works");
-					document.getElementById('pageNumber').value = i;
-					document.getElementById('form').submit();
+			</div>
+			<a href="#" id="back-to-top" style="display: none;padding: 5px;"><i style="text-align: center" class="fa fa-arrow-up"></i><br />Back To Top</a>
+			<div class="pagination">
+				@for (int i = 1; i <= Model.TotalPages; i++)
+				{
+					@if (!Model.isFilter)
+					{
+						<a style="margin: 0 5px;" href="/Order/List/@i">@i</a>
+					}
+					else
+					{
+						<a href="#" style="cursor: pointer; margin: 0 5px;" onclick="OnClickPageNumberLink(@i)" id="pageNumberLink">@i</a>
+					}
 				}
-			</script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			</div>
 		</div>
 	</div>
+	<script>
+		// JavaScript
+		$(document).ready(function () {
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > 50) {
+					$('#back-to-top').fadeIn();
+				} else {
+					$('#back-to-top').fadeOut();
+				}
+			});
+			// scroll body to 0px on click
+			$('#back-to-top').click(function () {
+				$('body,html').animate({
+					scrollTop: 0
+				}, 400);
+				return false;
+			});
+		});
+
+	</script>
+	<script>
+		function OnClickPageNumberLink(i) {
+			console.log("pageNumber = " + i);
+			console.log("It works");
+			document.getElementById('pageNumber').value = i;
+			document.getElementById('form').submit();
+		}
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
