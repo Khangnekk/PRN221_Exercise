@@ -30,12 +30,24 @@ namespace ExerciseRazerPage.Pages.Order
 		[BindProperty]
 		public string? Message { get; set; }
 		#endregion
-		public void OnGet()
+		public bool isFilter { get; set; }
+		public int? TotalPages { get; set; }
+		public int pageSize = 20;
+		public void OnGet(int? pageNumber)
 		{
+			int pageNum = (pageNumber ?? 1);
+			isFilter = false;
 			Orders = _context.Orders
 				.Include(c => c.Customer)
 				.Include(e => e.Employee)
 				.ToList();
+			// Calculate the total number of pages
+			int totalOrders = Orders.Count();
+			TotalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+
+			var OrdersResult = Orders.Skip((pageNum - 1) * pageSize).Take(pageSize);
+			Orders = OrdersResult.ToList();
+
 			customers = _context.Customers.ToList();
 			employees = _context.Employees.ToList();
 		}
@@ -45,8 +57,10 @@ namespace ExerciseRazerPage.Pages.Order
 			RedirectToPage("/Add");
 		}
 
-		public void OnPost()
+		public void OnPost(int? pageNumber)
 		{
+			isFilter = true;
+			int pageNum = (pageNumber ?? 1);
 			customers = _context.Customers.ToList();
 			employees = _context.Employees.ToList();
 
@@ -57,6 +71,12 @@ namespace ExerciseRazerPage.Pages.Order
 				.Where(e => CustomerID == "-1" || e.CustomerId == CustomerID)
 				.Where(e => e.OrderDate >= FromDate && e.OrderDate <= ToDate)
 				.ToList();
+			// Calculate the total number of pages
+			int totalOrders = Orders.Count();
+			TotalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+
+			var OrdersResult = Orders.Skip((pageNum - 1) * pageSize).Take(pageSize);
+			Orders = OrdersResult.ToList();
 			switch (SortBy)
 			{
 				case "OrderDate":
