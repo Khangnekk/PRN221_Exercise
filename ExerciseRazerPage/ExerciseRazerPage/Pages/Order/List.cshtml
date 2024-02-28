@@ -152,11 +152,11 @@
 						{
 							@if (!Model.isFilter)
 							{
-								<a href="/Order/List/@i">@i</a>
+								<a style="margin: 0 5px;" href="/Order/List/@i">@i</a>
 							}
 							else
 							{
-								<a style="cursor: pointer;" onclick="OnClickPageNumberLink(@i)" id="pageNumberLink">@i</a>
+								<a href="#" style="cursor: pointer; margin: 0 5px;" onclick="OnClickPageNumberLink(@i)" id="pageNumberLink">@i</a>
 							}
 						}
 					</div>
