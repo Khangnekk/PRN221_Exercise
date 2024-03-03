@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div style="display: flex; justify-content: center">
-		<div style="width: 60%">
+		<div style="width: 60%; margin-top: 3em">
 			<form method="post">
 				<fieldset>
 					<legend><b>Information of Order</b></legend>
@@ -47,21 +47,21 @@
 					<br>
 					<br>
 					<label>Order Date:</label>
-					<input type="date" id="OrderDate" name="OrderDate">
+					<input type="date" id="OrderDate" value="@DateTime.Today.ToString("yyyy-MM-dd")" name="OrderDate">
 					<br>
 					<br>
 					<label>Ship Address:</label>
-					<input type="text" id="ShipAddress" name="ShipAddress">
+					<input type="text" id="ShipAddress" name="ShipAddress" placeholder="FPT University - Hoa Lac High Tech Park, Hanoi, Vietnam">
 					<br>
 					<br>
 					<label>Ship Country:</label>
-					<input type="text" id="ship_country" name="ShipCountry">
+					<input type="text" id="ship_country" name="ShipCountry" placeholder="Vietnam">
 					<br>
 					<br>
 				</fieldset>
 				<input style="float: right; width: fit-content; padding: 5px; margin-top: 10px; background-color: forestgreen; color: white; cursor: pointer" type="submit" value="Add New Order">
 			</form>
-			@Model.Message <a asp-page="/Order/List">List of Orders</a>
+			@Model.Message <a asp-page="/Order/List" >Show Orders</a>
 		</div>
 	</div>
 </body>
