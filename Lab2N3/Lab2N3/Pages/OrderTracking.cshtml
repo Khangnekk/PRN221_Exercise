@@ -1,0 +1,72 @@
+﻿@page
+@model Lab2N3.Pages.OrderModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+</head>
+
+<body>
+    <header>
+        <a href="ListProducts.html" class="logo">
+            <h2>Lab2n3/PRN221</h2>
+        </a>
+        <form class="search-form" onsubmit="return validate()" method="post">
+            <div class="wrap">
+                <div class="search">
+                    <input type="text" title="Cannot search in view cart page" disabled class="searchTerm"
+                           placeholder="What are you looking for?">
+                    <button type="submit" disabled class="searchButton" title="Cannot search in view cart page">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <ul class="top-menu">
+            <li><a title="Home" href="/Index"><i class="fa fa-home"></i></a></li>
+            <li><a title="View cart" href="/Cart"><i class="fa fa-shopping-cart"></i></a></li>
+            <li><a title="Trending products" href="#trend"><i class="fa fa-heart"></i></a></li>
+            <li><a title="Order Tracking" href="#order-tracking" class="active"><i class="fa fa-truck"></i></a></li>
+        </ul>
+    </header>
+    <main class="main-order">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="hh-grayBox pt45 pb20" style="width: 800px">
+                        <div class="row justify-content-between">
+                            <div class="order-tracking completed">
+                                <span class="is-complete"></span>
+                                <p>Ordered<br><span>Mon, June 24</span></p>
+                            </div>
+                            <div class="order-tracking completed">
+                                <span class="is-complete"></span>
+                                <p>Shipped<br><span>Tue, June 25</span></p>
+                            </div>
+                            <div class="order-tracking">
+                                <span class="is-complete"></span>
+                                <p>Delivered<br><span>Fri, June 28</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<footer>
+    <section class="footer" style="position: relative; margin-top: 1em;">
+        <p>Copyright © 2024 Nguyen Luong Khang (HE161660) PRN221</p>
+    </section>
+</footer>
+
+</html>

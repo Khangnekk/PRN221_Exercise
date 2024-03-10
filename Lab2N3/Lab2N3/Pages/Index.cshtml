@@ -1,0 +1,210 @@
+﻿@page "{pageNumber?}"
+@model Lab2N3.Pages.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Product</title>
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet"
+		  href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+</head>
+
+<body>
+	<header>
+		<a href="/Index" class="logo">
+			<h2>Lab2n3/PRN221</h2>
+		</a>
+		<form class="search-form" style="margin: 0;" onsubmit="return validate()" method="post">
+			<div class="wrap">
+				<div class="search">
+					<input type="text" class="searchTerm" asp-for="key" value="@Model.key" placeholder="What are you looking for?">
+					<button type="submit" class="searchButton" title="Search">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</form>
+		<ul class="top-menu">
+			<li><a title="Home" href="/Index" class="active"><i class="fa fa-home"></i></a></li>
+			<li><a title="View cart" href="/Cart"><i class="fa fa-shopping-cart"></i></a></li>
+			<li><a title="Trending products" href="#trend"><i class="fa fa-heart"></i></a></li>
+			<li><a title="Order Tracking" href="#order-tracking"><i class="fa fa-truck"></i></a></li>
+		</ul>
+	</header>
+	<main>
+		<div class="filter-products">
+			<form method="post" asp-page-handler="Filter" id="form">
+				<h3 style="cursor: default">Category:</h3>
+				<select name="CategoryID" asp-for="CategoryID">
+					<option value="-1">All Categories</option>
+					@if (Model.Categories != null)
+					{
+						foreach (var c in Model.Categories)
+						{
+							<option value="@c.CategoryId">@c.CategoryName</option>
+						}
+					}
+				</select>
+				<h3 style="cursor: default">Supplier:</h3>
+				<select name="SupplierID" asp-for="SupplierID">
+					<option value="-1">All Supplier</option>
+					@if (Model.Suppliers != null)
+					{
+						foreach (var s in Model.Suppliers)
+						{
+							<option value="@s.SupplierId">@s.CompanyName</option>
+						}
+					}
+				</select>
+				<h3 style="cursor: default">Sort By:</h3>
+				<label class="sort-option">
+					@if (Model.SortBy == "ProductNameAZ")
+					{
+						<input type="radio" checked value="ProductNameAZ" name="SortBy" />
+					}
+					else
+					{
+						<input type="radio" value="ProductNameAZ" name="SortBy" />
+					}
+					<i>Product Name (A-Z)</i>
+				</label>
+				<br>
+				<label class="sort-option">
+					@if (Model.SortBy == "ProductNameZA")
+					{
+						<input type="radio" checked value="ProductNameZA" name="SortBy" />
+					}
+					else
+					{
+						<input type="radio" value="ProductNameZA" name="SortBy" />
+					}
+					<i>Product Name (Z-A)</i>
+				</label>
+				<br><br>
+				<label class="sort-option">
+					@if (Model.SortBy == "UnitPriceAZ")
+					{
+						<input type="radio" checked value="UnitPriceAZ" name="SortBy" />
+					}
+					else
+					{
+						<input type="radio" value="UnitPriceAZ" name="SortBy" />
+					}
+					<i>Unit Price (A-Z)</i>
+				</label>
+				<br>
+				<label class="sort-option">
+					@if (Model.SortBy == "UnitPriceZA")
+					{
+						<input type="radio" checked value="UnitPriceZA" name="SortBy" />
+					}
+					else
+					{
+						<input type="radio" value="UnitPriceZA" name="SortBy" />
+					}
+					<i>Unit Price (Z-A)</i>
+				</label>
+				<br><br>
+				<label class="sort-option">
+					@if (Model.SortBy == "UnitsInStockAZ")
+					{
+						<input type="radio" checked value="UnitsInStockAZ" name="SortBy" />
+					}
+					else
+					{
+						<input type="radio" value="UnitsInStockAZ" name="SortBy" />
+					}
+					<i>Units in stock (A-Z)</i>
+				</label>
+				<br>
+				<label class="sort-option">
+					@if (Model.SortBy == "UnitsInStockZA")
+					{
+						<input type="radio" checked value="UnitsInStockZA" name="SortBy" />
+					}
+					else
+					{
+						<input type="radio" value="UnitsInStockZA" name="SortBy" />
+					}
+					<i>Units in stock (Z-A)</i>
+				</label>
+				<br>
+				<input type="hidden" id="pageNumber" name="pageNumber">
+				<input type="submit" class="btn-apply-filter-products" value="Apply" />
+			</form>
+		</div>
+		<div class="container">
+			<div class="row">
+				@foreach (var product in Model.Products)
+				{
+					<div class="col">
+						<section class="product">
+							<h3>@product.ProductName</h3>
+							<p class="price"> $@product.UnitPrice?.ToString("0.00")</p>
+							<p class="Quantity-per-unit">Quantity Per Unit: @product.QuantityPerUnit</p>
+							<p class="status">In Stock: @product.UnitsInStock</p>
+							<div class="add-to-cart">
+								<button class="btn-add-to-cart">
+									<i class="fa fa-cart-plus"></i>
+									Add to cart
+								</button>
+							</div>
+						</section>
+					</div>
+				}
+			</div>
+			@if (Model.TotalPages >= 1)
+			{
+				<div class="pagination-container">
+					<div class="pagination">
+						<a onclick="OnClickPageNumberLink(@Model.PreviousPage)">&laquo;</a>
+						@for (int i = 1; i <= Model.TotalPages; i++)
+						{
+							@if (!Model.isFilter)
+							{
+								@if (Model.CurrentPageNumber == i)
+								{
+									<a class="active" href="/@i">@i</a>
+								}
+								else
+								{
+									<a href="/@i">@i</a>
+								}
+							}
+							else
+							{
+								@if (Model.CurrentPageNumber == i)
+								{
+									<a class="active" onclick="OnClickPageNumberLink(@i)" id="pageNumberLink">@i</a>
+								}
+								else
+								{
+									<a onclick="OnClickPageNumberLink(@i)" id="pageNumberLink">@i</a>
+								}
+							}
+						}
+						<a onclick="OnClickPageNumberLink(@Model.NextPage)">&raquo;</a>
+					</div>
+				</div>
+			}
+			else
+			{
+				<div style="display: flex; justify-content: center; width: 100%">
+				<div>
+					<h3> -- No products match, try another filter --</h3>
+				</div>
+				</div>
+			}
+
+		</div>
+	</main>
+	<script src="assets/js/script.js"></script>
+</body>
+<footer>
+	<section class="footer" style="position: relative;">
+		<p>Copyright © 2024 Nguyen Luong Khang (HE161660) PRN221</p>
+	</section>
+</footer>
