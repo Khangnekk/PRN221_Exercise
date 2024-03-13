@@ -124,6 +124,7 @@ namespace Lab2N3.Pages
 
 		public void OnPostSearch(int? pageNumber)
 		{
+			httpContextAccessor.HttpContext.Session.SetString("Key", "");
 			isFilter = true;
 			int pageNum = (pageNumber ?? 1);
 			CurrentPageNumber = pageNum;
