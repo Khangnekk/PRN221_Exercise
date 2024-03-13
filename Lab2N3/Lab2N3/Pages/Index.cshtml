@@ -17,7 +17,7 @@
 		<a href="/Index" class="logo">
 			<h2>Lab2n3/PRN221</h2>
 		</a>
-		<form class="search-form" style="margin: 0;" onsubmit="return validate()" method="post">
+		<form class="search-form" style="margin: 0;" onsubmit="return validate()" asp-page-handler="Search" method="post">
 			<div class="wrap">
 				<div class="search">
 					<input type="text" class="searchTerm" asp-for="key" value="@Model.key" placeholder="What are you looking for?">

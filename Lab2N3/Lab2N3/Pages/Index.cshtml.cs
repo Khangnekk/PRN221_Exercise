@@ -1,4 +1,4 @@
-using Lab2N3.Models;
+﻿using Lab2N3.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +8,13 @@ namespace Lab2N3.Pages
 	public class IndexModel : PageModel
 	{
 		private NorthwindContext context;
+		private IHttpContextAccessor httpContextAccessor;
 
-		public IndexModel(NorthwindContext context)
+		//cort: Constructor
+		public IndexModel(NorthwindContext context, IHttpContextAccessor httpContextAccessor)
 		{
 			this.context = context;
+			this.httpContextAccessor = httpContextAccessor;
 		}
 
 		public List<Models.Product> Products { get; set; }
@@ -38,7 +41,25 @@ namespace Lab2N3.Pages
 		public void OnGet(int? pageNumber)
 		{
 			isFilter = false;
-			ProcessRequest(pageNumber);
+			int pageNum = (pageNumber ?? 1);
+			CurrentPageNumber = pageNum;
+
+			Products = context.Products
+				.Include(p => p.Category)
+				.Include(p => p.Supplier)
+				.ToList();
+
+
+			int totalProducts = Products.Count();
+			TotalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+			var ProductResult = Products.Skip((pageNum - 1) * pageSize).Take(pageSize);
+			Products = ProductResult.ToList();
+
+			Categories = context.Categories.ToList();
+			Suppliers = context.Suppliers.ToList();
+
+			SortBy = "ProductNameAZ";
 			ProcessPage();
 		}
 
@@ -53,16 +74,28 @@ namespace Lab2N3.Pages
 			Products = context.Products
 					.Include(p => p.Category)
 					.Include(p => p.Supplier)
-					.Where(p => CategoryID == -1 || p.CategoryId == CategoryID)
-					.Where(p => SupplierID == -1 || p.SupplierId == SupplierID)
+					.Where(p => CategoryID == -1 || p.CategoryId == CategoryID || CategoryID == null)
+					.Where(p => SupplierID == -1 || p.SupplierId == SupplierID || SupplierID == null)
 					.ToList();
 
-			var filteredProducts = SearchedProducts != null ? SearchedProducts.ToList() : Products.ToList();
-
-			int totalProducts = filteredProducts.Count();
+			List<Product> SearchResult = new List<Product>();
+			key = httpContextAccessor.HttpContext.Session.GetString("Key");
+			if (key != null)
+			{
+				foreach (var p in Products)
+				{
+					if (p.ProductName.ToLower().Contains(key.ToLower()))
+					{
+						SearchResult.Add(p);
+					}
+				}
+				if (SearchResult != null)
+					Products = SearchResult;
+			}
+			int totalProducts = Products.Count();
 			TotalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
 
-			var ProductsResult = filteredProducts.Skip((pageNum - 1) * pageSize).Take(pageSize);
+			var ProductsResult = Products.Skip((pageNum - 1) * pageSize).Take(pageSize);
 			Products = ProductsResult.ToList();
 
 			switch (SortBy)
@@ -92,14 +125,19 @@ namespace Lab2N3.Pages
 		}
 
 
-		public void OnPost(int? pageNumber)
+		public void OnPostSearch(int? pageNumber)
 		{
+			isFilter = true;
 			int pageNum = (pageNumber ?? 1);
 			CurrentPageNumber = pageNum;
+			Categories = context.Categories.ToList();
+			Suppliers = context.Suppliers.ToList();
+			Products = context.Products.ToList();
 
 			List<Product> SearchResult = new List<Product>();
 			if (key != null)
 			{
+				httpContextAccessor.HttpContext.Session.SetString("Key", key);
 				foreach (var p in Products)
 				{
 					if (p.ProductName.ToLower().Contains(key.ToLower()))
@@ -116,29 +154,11 @@ namespace Lab2N3.Pages
 			var ProductsResult = Products.Skip((pageNum - 1) * pageSize).Take(pageSize);
 			Products = ProductsResult.ToList();
 			SearchedProducts = Products;
-		}
 
-		void ProcessRequest(int? pageNumber)
-		{
-			int pageNum = (pageNumber ?? 1);
-			CurrentPageNumber = pageNum;
-
-			Products = context.Products
-				.Include(p => p.Category)
-				.Include(p => p.Supplier)
-				.ToList();
-
-			int totalProducts = Products.Count();
-			TotalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
-
-			var ProductResult = Products.Skip((pageNum - 1) * pageSize).Take(pageSize);
-			Products = ProductResult.ToList();
-
-			Categories = context.Categories.ToList();
-			Suppliers = context.Suppliers.ToList();
-
-			SortBy = "ProductNameAZ";
-
+			if (SortBy == null)
+			{
+				SortBy = "ProductNameAZ";
+			}
 		}
 
 		void ProcessPage()
