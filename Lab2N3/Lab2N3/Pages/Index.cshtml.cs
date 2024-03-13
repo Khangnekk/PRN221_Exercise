@@ -16,12 +16,9 @@ namespace Lab2N3.Pages
 			this.context = context;
 			this.httpContextAccessor = httpContextAccessor;
 		}
-
 		public List<Models.Product> Products { get; set; }
 		public List<Models.Category> Categories { get; set; }
 		public List<Models.Supplier> Suppliers { get; set; }
-		public List<Models.Product> SearchedProducts { get; set; }
-
 
 		[BindProperty]
 		public int? CategoryID { get; set; }
@@ -153,7 +150,6 @@ namespace Lab2N3.Pages
 
 			var ProductsResult = Products.Skip((pageNum - 1) * pageSize).Take(pageSize);
 			Products = ProductsResult.ToList();
-			SearchedProducts = Products;
 
 			if (SortBy == null)
 			{
