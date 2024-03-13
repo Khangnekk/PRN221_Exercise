@@ -1,106 +1,107 @@
 ﻿@page
+@using Lab2N3.Models
 @model Lab2N3.Pages.CartModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+	int index = 0;
 }
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet"
-          href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cart</title>
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet"
+		  href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
 </head>
 
 <body>
-    <header>
-        <a href="/Index" class="logo"><h2>Lab2n3/PRN221</h2></a>
-        <form class="search-form" onsubmit="return validate()" method="post">
-            <div class="wrap">
-                <div class="search">
-                    <input type="text" title="Cannot search in view cart page" disabled class="searchTerm" placeholder="What are you looking for?">
-                    <button type="submit" disabled class="searchButton" title="Cannot search in view cart page">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-        <ul class="top-menu">
-            <li><a title="Home" href="/Index"><i class="fa fa-home"></i></a></li>
-            <li><a title="View cart" href="/Cart" class="active"><i class="fa fa-shopping-cart"></i></a></li>
-            <li><a title="Trending products" href="#trend"><i class="fa fa-heart"></i></a></li>
-            <li><a title="Order Tracking" href="#order-tracking"><i class="fa fa-truck"></i></a></li>
-        </ul>
-    </header>
-    <main class="cart-main">
-        <section class="cart-order" style="min-height: 81vh;">
-            <table class="cart-order-table" border="1px" style="border-collapse: collapse;">
-                <thead>
-                    <tr class="table-header">
-                        <th>No.</th>
-                        <th>Product Name</th>
-                        <th style="text-align: center;">Price</th>
-                        <th style="text-align: center;">Quantity</th>
-                        <th style="text-align: center;">Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="table-body">
-                        <td style="text-align: center;">1</td>
-                        <td>Louisiana Fiery Hot Pepper Sauce</td>
-                        <td style="text-align: center;">$50</td>
-                        <td class="cart-quantity">
-                            <i class="fa fa-minus btn-quantity"></i>
-                            <p>3</p>
-                            <i class="fa fa-plus btn-quantity"></i>
-                        </td>
-                        <td style="text-align: center;">$150</td>
-                    </tr>
-                    <tr class="table-body">
-                        <td style="text-align: center;">2</td>
-                        <td>Louisiana </td>
-                        <td style="text-align: center;">$50</td>
-                        <td class="cart-quantity">
-                            <i class="fa fa-minus btn-quantity"></i>
-                            <p>2</p>
-                            <i class="fa fa-plus btn-quantity"></i>
-                        </td>
-                        <td style="text-align: center;">$100</td>
-                    </tr>
-                    <tr class="table-body">
-                        <td style="text-align: center;">3</td>
-                        <td>Mozzarella di Giovanni</td>
-                        <td style="text-align: center;">$50</td>
-                        <td class="cart-quantity">
-                            <i class="fa fa-minus btn-quantity"></i>
-                            <p>3</p>
-                            <i class="fa fa-plus btn-quantity"></i>
-                        </td>
-                        <td style="text-align: center;">$150</td>
-                    </tr>
-                </tbody>
-                <tfoot class="table-foot">
-                    <tr>
-                        <td colspan="5" class="total-cart">
-                            Total: $400
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5">
-                            <a class="btn-order-link" href="Order.html">
-                                <button class="btn-order">
-                                    Order now
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
-    </main>
+	<header>
+		<a href="/Index" class="logo"><h2>Lab2n3/PRN221</h2></a>
+		<form class="search-form" onsubmit="return validate()" method="post">
+			<div class="wrap">
+				<div class="search">
+					<input type="text" title="Cannot search in view cart page" disabled class="searchTerm" placeholder="What are you looking for?">
+					<button type="submit" disabled class="searchButton" title="Cannot search in view cart page">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</form>
+		<ul class="top-menu">
+			<li><a title="Home" href="/Index"><i class="fa fa-home"></i></a></li>
+			<li><a title="View cart" href="/Cart" class="active"><i class="fa fa-shopping-cart"></i></a></li>
+			<li><a title="Trending products" href="#trend"><i class="fa fa-heart"></i></a></li>
+			<li><a title="Order Tracking" href="#order-tracking"><i class="fa fa-truck"></i></a></li>
+		</ul>
+	</header>
+	<main class="cart-main">
+		<section class="cart-order" style="min-height: 81vh;">
+			<table class="cart-order-table" border="1px" style="border-collapse: collapse;">
+				<thead>
+					<tr class="table-header">
+						<th>No.</th>
+						<th>Product Name</th>
+						<th style="text-align: center;">Price</th>
+						<th style="text-align: center;">Quantity</th>
+						<th style="text-align: center;">Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					@if (Model.Cart == null || Model.Cart.Count == 0)
+					{
+						<tr class="table-body">
+							<td colspan="5" style="text-align: center; padding: 10px">
+								<a>There are currently no products in the cart</a><br><br>
+								<a>(Try going</a> <a href="../"> Back to home page </a> <a> and adding a few products)</a>
+							</td>
+						</tr>
+					}
+					else
+					@foreach (Product p in Model.Cart.Keys)
+					{
+						{index++;}
+						<tr class="table-body">
+							<td style="text-align: center;">@index</td>
+							<td>@p.ProductName</td>
+							<td style="text-align: center;">$@p.UnitPrice?.ToString("0.00")</td>
+							<td class="cart-quantity">
+								<form style="margin: 0" method="post">
+									<button type="submit" asp-page-handler="removefromcart" class="fa fa-minus btn-quantity" name="ProductID" value="@p.ProductId">
+									</button>
+								</form>
+								<p>@Model.Cart[p]</p>
+								<form style="margin: 0" method="post">
+									<button type="submit" asp-page-handler="addtocart" class="fa fa-plus btn-quantity" name="ProductID" value="@p.ProductId">
+									</button>
+								</form>
+							</td>
+							<td style="text-align: center;">$@((p.UnitPrice * @Model.Cart[p])?.ToString("0.00"))</td>
+						</tr>
+					}
+				</tbody>
+				<tfoot class="table-foot">
+					<tr>
+						<td colspan="5" class="total-cart">
+							Total: $@Model.CartTotal.ToString("0.00")
+						</td>
+					</tr>
+					<tr>
+						<td colspan="5">
+							<a class="btn-order-link" href="Order.html">
+								<button class="btn-order">
+									Order now
+								</button>
+							</a>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</section>
+	</main>
 </body>
 <footer>
-    <section class="footer" style="position: relative; margin-top: 1em;">
-        <p>Copyright © 2024 Nguyen Luong Khang (HE161660) PRN221</p>
-    </section>
+	<section class="footer" style="position: relative; margin-top: 1em;">
+		<p>Copyright © @DateTime.Now.Year Nguyen Luong Khang (HE161660) PRN221</p>
+	</section>
 </footer>

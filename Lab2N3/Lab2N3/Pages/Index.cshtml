@@ -147,10 +147,13 @@
 							<p class="Quantity-per-unit">Quantity Per Unit: @product.QuantityPerUnit</p>
 							<p class="status">In Stock: @product.UnitsInStock</p>
 							<div class="add-to-cart">
-								<button class="btn-add-to-cart">
-									<i class="fa fa-cart-plus"></i>
-									Add to cart
-								</button>
+								<form method="post">
+									<input type="hidden" name="CategoryId" value="@Model.CategoryID" />
+									<button class="btn-add-to-cart" type="submit" asp-page-handler="addtocart" name="ProductID" value="@product.ProductId">
+										<i class="fa fa-cart-plus"></i>
+										Add to cart
+									</button>
+								</form>
 							</div>
 						</section>
 					</div>
@@ -193,9 +196,9 @@
 			else
 			{
 				<div style="display: flex; justify-content: center; width: 100%">
-				<div>
-					<h3> -- No products match, try another filter --</h3>
-				</div>
+					<div>
+						<h3> -- No products match, try another filter --</h3>
+					</div>
 				</div>
 			}
 
@@ -205,6 +208,6 @@
 </body>
 <footer>
 	<section class="footer" style="position: relative;">
-		<p>Copyright © 2024 Nguyen Luong Khang (HE161660) PRN221</p>
+		<p>Copyright © @DateTime.Now.Year Nguyen Luong Khang (HE161660) PRN221</p>
 	</section>
 </footer>

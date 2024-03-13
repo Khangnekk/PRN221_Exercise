@@ -1,4 +1,5 @@
-﻿using Lab2N3.Models;
+﻿using Lab2N3.Logics;
+using Lab2N3.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -156,6 +157,20 @@ namespace Lab2N3.Pages
 			{
 				SortBy = "ProductNameAZ";
 			}
+		}
+
+		public void OnPostAddToCart(int ProductID)
+		{
+			GetData();
+			CartManager cartManager = new CartManager(httpContextAccessor.HttpContext!.Session);
+			cartManager.AddToCart(ProductID);
+		}
+
+		private void GetData()
+		{
+			Categories = context.Categories.ToList();
+			Suppliers = context.Suppliers.ToList();
+			Products = context.Products.ToList();
 		}
 
 		void ProcessPage()
