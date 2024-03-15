@@ -84,6 +84,8 @@ namespace Lab2N3.Pages
 			context.Orders.Add(newOrder);
 			context.SaveChanges();
 			Message = $"Add Order Successfully";
+			CartManager cartManager = new CartManager(httpContextAccessor.HttpContext!.Session);
+			cartManager.RemoveTemporaryCart();
 		}
 
 		void ProcessRequest()

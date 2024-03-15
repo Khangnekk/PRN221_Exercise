@@ -1,0 +1,65 @@
+﻿@page "{OrderID}"
+@model Lab2N3.Pages.OrderDetailModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+
+}
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cart</title>
+	<link rel="stylesheet" href="/assets/css/styles.css">
+	<link rel="stylesheet"
+		  href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+	<style>
+		.ListOrderDetail{
+			position: fixed;
+			top: 40%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 600px;
+		}
+
+		.ListOrderDetail th, td {
+			padding: 5px 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<a href="/Index" class="logo"><h2>Lab2n3/PRN221</h2></a>
+		<ul class="top-menu">
+			<li><a title="Home" href="/Index"><i class="fa fa-home"></i></a></li>
+			<li><a title="View cart" href="/Cart" class="active"><i class="fa fa-shopping-cart"></i></a></li>
+			<li><a title="Orders" href="/Order"><i class="fa fa-file-alt"></i></a></li>
+			<li><a title="Order Tracking" href="#order-tracking"><i class="fa fa-truck"></i></a></li>
+		</ul>
+	</header>
+	<main style="min-height: 81vh; display: flex; justify-content: center">
+		<div >
+			<table class="ListOrderDetail" border="1px" style="border-collapse: collapse">
+				<tr>
+					<th>OrderID</th>
+					<th>Product Name</th>
+					<th>Unit Price</th>
+					<th>Quantity</th>
+				</tr>
+				@foreach (var od in Model.OrderDetails)
+				{
+					<tr>
+						<td>@od.OrderId</td>
+						<td>@od.Product.ProductName</td>
+						<td>@od.UnitPrice.ToString("0.00")</td>
+						<td>@od.Quantity</td>
+					</tr>
+				}
+			</table>
+		</div>
+	</main>
+</body>
+<footer>
+	<section class="footer" style="position: relative; margin-top: 1em;">
+		<p>Copyright © @DateTime.Now.Year Nguyen Luong Khang (HE161660) PRN221</p>
+	</section>
+</footer>

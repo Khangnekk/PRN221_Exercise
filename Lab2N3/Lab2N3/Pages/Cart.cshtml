@@ -34,7 +34,7 @@
 <body>
 	<header>
 		<a href="/Index" class="logo"><h2>Lab2n3/PRN221</h2></a>
-		<form class="search-form" onsubmit="return validate()" method="post">
+		@* <form class="search-form" onsubmit="return validate()" method="post">
 			<div class="wrap">
 				<div class="search">
 					<input type="text" title="Cannot search in view cart page" disabled class="searchTerm" placeholder="What are you looking for?">
@@ -43,7 +43,7 @@
 					</button>
 				</div>
 			</div>
-		</form>
+		</form> *@
 		<ul class="top-menu">
 			<li><a title="Home" href="/Index"><i class="fa fa-home"></i></a></li>
 			<li><a title="View cart" href="/Cart" class="active"><i class="fa fa-shopping-cart"></i></a></li>
@@ -66,12 +66,26 @@
 				<tbody>
 					@if (Model.Cart == null || Model.Cart.Count == 0)
 					{
-						<tr class="table-body">
-							<td colspan="5" style="text-align: center; padding: 10px">
-								<a>There are currently no products in the cart</a><br><br>
-								<a>(Try going</a> <a href="../"> Back to home page </a> <a> and adding a few products)</a>
-							</td>
-						</tr>
+						if (Model.Message == null)
+						{
+							<tr class="table-body">
+								<td colspan="5" style="text-align: center; padding: 10px">
+									<a>There are currently no products in the cart</a><br><br>
+									<a>(Try going</a> <a href="../"> Back to home page </a> <a> and adding a few products)</a>
+								</td>
+							</tr>
+						}
+						else
+						{
+							<tr class="table-body">
+								<td colspan="5" style="text-align: center; padding: 10px;">
+									<img src="~/images/circlecheck.png" height="80"/><br></br>
+									<a style="text-decoration: none; color: green" href="/Order">@Model.Message</a>
+									<br><br>
+									<a href="../">(Going to home page </a> <a> and continue shopping)</a>
+								</td>
+							</tr>
+						}
 					}
 					else
 						@foreach (Product p in Model.Cart.Keys)
@@ -98,11 +112,6 @@
 				</tbody>
 
 				<tfoot class="table-foot">
-					<tr>
-						<td colspan="5" style="text-align: center; color: green">
-							<a href="/Order">@Model.Message</a>
-						</td>
-					</tr>
 					<tr>
 						<td colspan="5" class="total-cart">
 							Total: $@Model.CartTotal.ToString("0.00")

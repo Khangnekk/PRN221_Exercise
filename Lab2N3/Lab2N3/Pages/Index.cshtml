@@ -35,7 +35,7 @@
 		</ul>
 	</header>
 	<main>
-		<div class="filter-products">
+		<div class="filter">
 			<form method="post" asp-page-handler="Filter" id="form">
 				<h3 style="cursor: default">Category:</h3>
 				<select name="CategoryID" asp-for="CategoryID">
@@ -133,7 +133,7 @@
 				</label>
 				<br>
 				<input type="hidden" id="pageNumber" name="pageNumber">
-				<input type="submit" class="btn-apply-filter-products" value="Apply" />
+				<input type="submit" class="btn-apply-filter" value="Apply" />
 			</form>
 		</div>
 		<div class="container">
