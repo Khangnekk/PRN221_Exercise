@@ -12,7 +12,23 @@
 	<link rel="stylesheet" href="assets/css/styles.css">
 	<link rel="stylesheet"
 		  href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
+	<style>
+		#formPopup {
+			width: 600px;
+			height: 405px;
+			display: none;
+			position: absolute;
+			top: 40%;
+			left: 50%;
+			border-radius: 20px;
+			background-color: #b9c5cc;
+			border: 3px solid #fff;
+			transform: translate(-50%,-50%);
+			opacity: 0.97;
+			padding: 1em;
+			transition: all 1s ease;
+		}
+	</style>
 </head>
 
 <body>
@@ -31,7 +47,7 @@
 		<ul class="top-menu">
 			<li><a title="Home" href="/Index"><i class="fa fa-home"></i></a></li>
 			<li><a title="View cart" href="/Cart" class="active"><i class="fa fa-shopping-cart"></i></a></li>
-			<li><a title="Trending products" href="#trend"><i class="fa fa-heart"></i></a></li>
+			<li><a title="Orders" href="/Order"><i class="fa fa-file-alt"></i></a></li>
 			<li><a title="Order Tracking" href="#order-tracking"><i class="fa fa-truck"></i></a></li>
 		</ul>
 	</header>
@@ -58,29 +74,35 @@
 						</tr>
 					}
 					else
-					@foreach (Product p in Model.Cart.Keys)
-					{
-						{index++;}
-						<tr class="table-body">
-							<td style="text-align: center;">@index</td>
-							<td>@p.ProductName</td>
-							<td style="text-align: center;">$@p.UnitPrice?.ToString("0.00")</td>
-							<td class="cart-quantity">
-								<form style="margin: 0" method="post">
-									<button type="submit" asp-page-handler="removefromcart" class="fa fa-minus btn-quantity" name="ProductID" value="@p.ProductId">
-									</button>
-								</form>
-								<p>@Model.Cart[p]</p>
-								<form style="margin: 0" method="post">
-									<button type="submit" asp-page-handler="addtocart" class="fa fa-plus btn-quantity" name="ProductID" value="@p.ProductId">
-									</button>
-								</form>
-							</td>
-							<td style="text-align: center;">$@((p.UnitPrice * @Model.Cart[p])?.ToString("0.00"))</td>
-						</tr>
-					}
+						@foreach (Product p in Model.Cart.Keys)
+						{
+							{ index++; }
+							<tr class="table-body">
+								<td style="text-align: center;">@index</td>
+								<td>@p.ProductName</td>
+								<td style="text-align: center;">$@p.UnitPrice?.ToString("0.00")</td>
+								<td class="cart-quantity">
+									<form style="margin: 0" method="post">
+										<button type="submit" asp-page-handler="removefromcart" class="fa fa-minus btn-quantity" name="ProductID" value="@p.ProductId">
+										</button>
+									</form>
+									<p>@Model.Cart[p]</p>
+									<form style="margin: 0" method="post">
+										<button type="submit" asp-page-handler="addtocart" class="fa fa-plus btn-quantity" name="ProductID" value="@p.ProductId">
+										</button>
+									</form>
+								</td>
+								<td style="text-align: center;">$@((p.UnitPrice * @Model.Cart[p])?.ToString("0.00"))</td>
+							</tr>
+						}
 				</tbody>
+
 				<tfoot class="table-foot">
+					<tr>
+						<td colspan="5" style="text-align: center; color: green">
+							<a href="/Order">@Model.Message</a>
+						</td>
+					</tr>
 					<tr>
 						<td colspan="5" class="total-cart">
 							Total: $@Model.CartTotal.ToString("0.00")
@@ -88,17 +110,84 @@
 					</tr>
 					<tr>
 						<td colspan="5">
-							<a class="btn-order-link" href="Order.html">
-								<button class="btn-order">
-									Order now
-								</button>
-							</a>
+							<button class="btn-order" id="btn-show-form">
+								Order now
+							</button>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
 		</section>
 	</main>
+	<div id="formPopup" style="display: none; color: black">
+		<form style="margin: 0" method="post">
+			<fieldset>
+				<legend><b>Information of Order</b></legend>
+				<label>Employee:</label>
+				<select name="EmployeeID">
+					@if (Model.Employees != null)
+					{
+						foreach (var e in Model.Employees)
+						{
+							<option value="@e.EmployeeId">@e.FirstName @e.LastName</option>
+						}
+					}
+				</select>
+				<br>
+				<br>
+				<label>Customer:</label>
+				<select name="CustomerID">
+					@if (Model.Customers != null)
+					{
+						foreach (var e in Model.Customers)
+						{
+							<option value="@e.CustomerId">@e.CompanyName - @e.ContactName</option>
+						}
+					}
+				</select>
+				<br>
+				<br>
+				<label>Order Date:</label>
+				<input type="date" style="width: 100%; height: 25px" id="OrderDate" value="@DateTime.Today.ToString("yyyy-MM-dd")" name="OrderDate">
+				<br>
+				<br>
+				<label>Ship Address:</label>
+				<input type="text" style="width: 100%; height: 25px" id="ShipAddress" name="ShipAddress" placeholder="FPT University - Hoa Lac High Tech Park, Hanoi, Vietnam">
+				<br>
+				<br>
+				<label>Ship Country:</label>
+				<input type="text" style="width: 100%; height: 25px" id="ship_country" maxlength="15" name="ShipCountry" placeholder="Vietnam">
+				<br>
+				<br>
+			</fieldset>
+			<div style="display: flex; justify-content: space-between; margin-top: 10px">
+				<div>
+					<input style="width: fit-content; margin: 10px 0 0 10px;" class="btn-close" id="btn-close-form" type="submit" value="Close">
+				</div>
+				<div>
+
+					<input style=" width: fit-content; margin: 10px 10px 0 0;" class="btn-order" asp-page-handler="ordernow" type="submit" value="Order">
+				</div>
+			</div>
+		</form>
+	</div>
+	<script>
+		const btn = document.getElementById("btn-show-form");
+		btn.addEventListener('click', () => {
+			const form = document.getElementById('formPopup');
+			if (form.style.display == 'none') {
+				form.style.display = 'block';
+			} else {
+				form.style.display = 'none';
+			}
+		});
+
+		const btnClose = document.getElementById("btn-close-form");
+		btnClose.addEventListener('click', () => {
+			const form = document.getElementById('formPopup');
+			form.style.display = 'none';
+		});
+	</script>
 </body>
 <footer>
 	<section class="footer" style="position: relative; margin-top: 1em;">

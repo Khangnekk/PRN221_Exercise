@@ -53,6 +53,11 @@ namespace Lab2N3.Logics
 			_session.SetString("cart", JsonSerializer.Serialize(_cart));
 		}
 
+		public void RemoveTemporaryCart()
+		{
+			_session.Clear();
+		}
+
 		public Dictionary<int, int> GetProducts()
 		{
 			return _cart;
