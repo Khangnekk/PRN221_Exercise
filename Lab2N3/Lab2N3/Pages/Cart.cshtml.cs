@@ -2,6 +2,7 @@ using Lab2N3.Logics;
 using Lab2N3.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Lab2N3.Pages
 {
@@ -28,9 +29,12 @@ namespace Lab2N3.Pages
 		[BindProperty]
 		public string? Message { get; set; }
 
-		public CartModel(NorthwindContext context, IHttpContextAccessor httpContextAccessor)
+		private readonly IHubContext<CartHub> _hubContext;
+
+		public CartModel(NorthwindContext context, IHttpContextAccessor httpContextAccessor, IHubContext<CartHub> hubContext)
 		{
 			this.context = context;
+			_hubContext = hubContext;
 			this.httpContextAccessor = httpContextAccessor;
 			Cart = new Dictionary<Product, int>();
 			CartTotal = 0;
@@ -44,17 +48,19 @@ namespace Lab2N3.Pages
 			ProcessRequest();
 		}
 
-		public void OnPostAddToCart(int ProductID)
+		public async Task OnPostAddToCart(int ProductID)
 		{
 			CartManager cartManager = new CartManager(httpContextAccessor.HttpContext!.Session);
 			cartManager.AddToCart(ProductID);
 			ProcessRequest();
+			await _hubContext.Clients.All.SendAsync("UpdateCart", Cart);
 		}
-		public void OnPostRemoveFromCart(int ProductID)
+		public async Task OnPostRemoveFromCart(int ProductID)
 		{
 			CartManager cartManager = new CartManager(httpContextAccessor.HttpContext!.Session);
 			cartManager.RemoveFromCart(ProductID);
 			ProcessRequest();
+			await _hubContext.Clients.All.SendAsync("UpdateCart", Cart);
 		}
 
 		public void OnPostOrderNow()

@@ -34,7 +34,6 @@
 			<li><a title="Home" href="/Index"><i class="fa fa-home"></i></a></li>
 			<li><a title="View cart" href="/Cart"><i class="fa fa-shopping-cart"></i></a></li>
 			<li><a title="Orders" href="/Order" class="active"><i class="fa fa-file-alt"></i></a></li>
-			<li><a title="Order Tracking" href="#order-tracking"><i class="fa fa-truck"></i></a></li>
 		</ul>
 	</header>
 	<main style="min-height: 81vh;">
@@ -117,9 +116,9 @@
 									</td>
 								<td>@o.Customer.CompanyName</td>
 								<td>@o.Employee.FirstName @o.Employee.LastName</td>
-								<td>@o.OrderDate</td>
-								<td>@o.RequiredDate</td>
-								<td>@o.ShippedDate</td>
+								<td>@o.OrderDate?.ToString("MM-dd-yyyy")</td>
+								<td>@o.RequiredDate?.ToString("MM-dd-yyyy")</td>
+								<td>@o.ShippedDate?.ToString("MM-dd-yyyy")</td>
 								<td>@o.Freight</td>
 								<td>@o.ShipCountry</td>
 							</tr>
