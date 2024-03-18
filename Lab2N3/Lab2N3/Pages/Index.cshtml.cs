@@ -11,7 +11,7 @@ namespace Lab2N3.Pages
 		private NorthwindContext context;
 		private IHttpContextAccessor httpContextAccessor;
 
-		//cort: Constructor
+		//cach viet nhanh Constructor: cort tab
 		public IndexModel(NorthwindContext context, IHttpContextAccessor httpContextAccessor)
 		{
 			this.context = context;

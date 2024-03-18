@@ -6,6 +6,11 @@ toast.textContent = 'Successfully Added to Cart';
 
 addToCartButtons.forEach((button) => {
     button.addEventListener('click', () => {
+        console.log(button.value);
+        if (button.value == 0) {
+            toast.textContent = 'Out of stock';
+            toast.style.backgroundColor = 'red';
+        }
         document.body.appendChild(toast);
         console.log('Clicked')
         setTimeout(() => {

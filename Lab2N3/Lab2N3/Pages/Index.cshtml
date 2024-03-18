@@ -145,15 +145,29 @@
 							<p class="price"> $@product.UnitPrice?.ToString("0.00")</p>
 							<p class="Quantity-per-unit">Quantity Per Unit: @product.QuantityPerUnit</p>
 							<p class="status">In Stock: @product.UnitsInStock</p>
-							<div class="add-to-cart">
-								<form method="post">
-									<input type="hidden" name="CategoryId" value="@Model.CategoryID" />
-									<button class="btn-add-to-cart" type="submit" asp-page-handler="addtocart" name="ProductID" value="@product.ProductId">
-										<i class="fa fa-cart-plus"></i>
-										Add to cart
-									</button>
-								</form>
-							</div>
+							@if (product.UnitsInStock == 0)
+							{
+								<div class="add-to-cart">
+									<div>
+										<button class="btn-add-to-cart" style="background-color: red" name="UnitsInStock" value="@product.UnitsInStock">
+											<i class="fa fa-cart-plus"></i>
+											Add to cart
+										</button>
+									</div>
+								</div>
+							}
+							else
+							{
+								<div class="add-to-cart">
+									<form method="post">
+										<input type="hidden" name="CategoryId" value="@Model.CategoryID" />
+										<button class="btn-add-to-cart" type="submit" asp-page-handler="addtocart" name="ProductID" value="@product.ProductId">
+											<i class="fa fa-cart-plus"></i>
+											Add to cart
+										</button>
+									</form>
+								</div>
+							}
 						</section>
 					</div>
 				}
