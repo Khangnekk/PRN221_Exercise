@@ -344,6 +344,35 @@ select {
     background-color: rgba(226, 226, 226, 0.685);
 }
 
+
+#formPopup {
+    width: 600px;
+    height: 405px;
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    border-radius: 20px;
+    background-color: #b9c5cc;
+    border: 3px solid #fff;
+    transform: translate(-50%,-50%);
+    opacity: 0.97;
+    padding: 1em;
+    transition: all 1s ease;
+    animation: appear 0.3s ease;
+}
+
+@keyframes appear {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 40%;
+    }
+}
+
+
 /* styles.css */
 .toast {
     position: fixed;
@@ -354,7 +383,34 @@ select {
     padding: 0.5em 1em;
     border-radius: 20px;
     display: none;
-    transition: all 1s ease;
+    animation: toastMove 1.5s ease-in-out;
+}
+
+@keyframes toastMove {
+    0% {
+        top: 5em;
+        right: -30px;
+    }
+
+    20% {
+        top: 5em;
+        right: 20px;
+    }
+
+    50% {
+        top: 5em;
+        right: 20px;
+    }
+
+    75% {
+        top: 5em;
+        right: 20px;
+    }
+
+    100% {
+        top: 5em;
+        right: -30px;
+    }
 }
 
 /* order */
@@ -456,13 +512,3 @@ select {
     .order-tracking.completed:before {
         background-color: #27aa80;
     }
-
-.formPopup {
-    display: none;
-    position: fixed;
-    left: 45%;
-    top: 5%;
-    transform: translate(-50%, 5%);
-    border: 3px solid #999999;
-    z-index: 9999;
-}

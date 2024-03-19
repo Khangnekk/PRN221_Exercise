@@ -15,10 +15,10 @@ addToCartButtons.forEach((button) => {
         console.log('Clicked')
         setTimeout(() => {
             toast.style.display = 'block';
-        }, 100); 
+        }, 300); 
         setTimeout(() => {
             toast.style.display = 'none';
-        }, 550); 
+        }, 1800); 
     });
 });
 
